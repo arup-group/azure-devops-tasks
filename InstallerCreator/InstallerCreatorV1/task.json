@@ -1,0 +1,74 @@
+{
+    "id": "7ba92121-77ca-4742-a7fa-b70a032011e7",
+    "name": "OasysRelease",
+    "friendlyName": "OasysRelease",
+    "description": "Build an Oasys Release",
+    "helpUrl": "https://github.com/arup-group/azure-devops-tasks/",
+    "helpMarkDown": "[Learn more about this task](https://github.com/arup-group/azure-devops-tasks/blob/master/README.md)",
+    "category": "Build",
+    "visibility": [
+        "Build"
+    ],
+    "author": "Arup Group",
+    "version": {
+        "Major": 1,
+        "Minor": 0,
+        "Patch": 0
+    },
+    "demands": [
+    ],
+    "minimumAgentVersion": "1.95.0",
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": false
+        }
+    ],
+    "inputs": [
+        {
+            "name": "sourceBranch",
+            "type": "string",
+            "label": "Source Branch",
+            "defaultValue": "$(Build.SourceBranch)",
+            "required": true,
+            "helpMarkDown": "Source branch for the pipeline"
+        },
+        {
+            "name": "sourcesDirectory",
+            "type": "string",
+            "label": "Sources Directory",
+            "defaultValue": "$(Build.SourcesDirectory)",
+            "required": true,
+            "helpMarkDown": "Sources directory for the pipeline"
+        },
+        {
+            "name": "projectDisplayName",
+            "type": "string",
+            "label": "Display Name of the project",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Display Name of the project"
+        },
+        {
+            "name": "buildHelp",
+            "type": "radio",
+            "label": "Build Help?",
+            "required": true,
+            "defaultValue": "Yes",
+            "options": {
+                "yes": "Yes",
+                "no": "No"
+            }
+        }
+    ],
+    "instanceNameFormat": "Build release",
+    "execution": {
+        "PowerShell3": {
+            "target": "installerCreator.ps1",
+            "platforms": [
+                "windows"
+            ]
+        }
+    }
+}
