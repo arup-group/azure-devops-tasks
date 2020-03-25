@@ -12,8 +12,8 @@
     "author": "Arup Group",
     "version": {
         "Major": 1,
-        "Minor": 0,
-        "Patch": 0
+        "Minor": 1,
+        "Patch": 1
     },
     "demands": [
     ],
@@ -55,7 +55,6 @@
             "type": "radio",
             "label": "Build Help?",
             "required": true,
-            "defaultValue": "Yes",
             "options": {
                 "yes": "Yes",
                 "no": "No"
