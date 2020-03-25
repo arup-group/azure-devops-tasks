@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "installer-create-task",
     "name": "Oasys Installer Create Task",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "ArupGroup",
     "targets": [
         {
@@ -26,7 +26,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "buildAndReleaseTask"
+                "name": "InstallerCreator/InstallerCreatorV1"
             }
         }
     ]
