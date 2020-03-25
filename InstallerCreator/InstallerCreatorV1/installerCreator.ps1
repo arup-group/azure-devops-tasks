@@ -13,7 +13,8 @@ try {
    $majorNumber = [string]$sourceBranch.split("_")[1]
    $minorNumber = [string]$sourceBranch.split("_")[2]
    $buildNumber = [string]$sourceBranch.split("_")[3]
-
+   
+   Set-Location -Path $sourcesDirectory
    Write-Output "Copying Installer"
    Copy-Item -Path oasys-windows-installer -Destination oasys-combined\gsa-assembler -recurse -Force 
 
