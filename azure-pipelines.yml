@@ -1,0 +1,24 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: PublishAzureDevOpsExtension@2
+  displayName: publishExtension
+  inputs:
+    connectTo: 'VsTeam'
+    connectedServiceName: 'publish extension'
+    fileType: 'manifest'
+    publisherId: 'ArupGroup'
+    extensionId: '7ba92121-77ca-4742-a7fa-b70a032011e7'
+    extensionName: 'OasysRelease'
+    extensionVisibility: 'private'
+    extensionPricing: 'free'
+    shareWith: 'oasys-software'
