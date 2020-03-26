@@ -62,7 +62,7 @@ try {
 
    Write-Output "Running Insaller"
    c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDir/oasys-combined/gsa-assembler && ./update_release_version.sh -product $project -major $majorNumber -minor $minorNumber -build $buildNumber"
-   c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDir/oasys-combined/gsa-assembler/$project-$majorNumber.$minorNumber && make clean all"
+   c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDir/oasys-combined/gsa-assembler/$project-$majorNumber.$minorNumber && make clean all 2>errors.log && if grep -iq 'error' errors.log; then cat errors.log && exit 1; fi"
 } finally {
   Trace-VstsLeavingInvocation $MyInvocation
 }
