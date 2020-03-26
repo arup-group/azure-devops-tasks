@@ -19,6 +19,7 @@ steps:
     publisherId: 'ArupGroup'
     extensionId: '7ba92121-77ca-4742-a7fa-b70a032011e7'
     extensionName: 'OasysRelease'
+    updateTasksVersionType: 'patch'
     extensionVisibility: 'private'
     extensionPricing: 'free'
     shareWith: 'oasys-software'
