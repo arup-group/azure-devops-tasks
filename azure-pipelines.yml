@@ -17,12 +17,13 @@ steps:
     publisherId: 'ArupGroup'
     extensionId: 'installer-create-task'
     versionAction: 'Patch'
+    setBuildNumber: 'true'
 - task: PublishAzureDevOpsExtension@2
   displayName: publishExtension
   inputs:
     connectTo: 'VsTeam'
     connectedServiceName: 'publish extension'
     fileType: 'manifest'
-    extensionVersion: '$(Extension.Version)'
-    updateTasksVersionType: 'patch'
+    extensionVersion: '$(QueryAzureDevOpsExtensionVersion.Extension.Version)'
+    updateTasksVersion: false
     shareWith: 'oasys-software'
