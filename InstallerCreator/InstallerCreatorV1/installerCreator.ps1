@@ -31,7 +31,8 @@ try {
     Set-Variable -Name outputPath -Value "$sourcePath\output"
     
     # Project Settings
-    Set-Variable -Name helpProject -Value "$project.hmxp"
+    [string]$helpFileOverride = Get-VstsInput -Name helpFileOverride -Default "$project.hmxp"
+    Set-Variable -Name helpProject -Value $helpFileOverride
     Set-Variable -Name skinFile -Value Oasys.hmskin
     Set-Variable -Name logFile -Value "$project.log"
     Set-Variable -Name projectVariables -Value project_variables.txt
