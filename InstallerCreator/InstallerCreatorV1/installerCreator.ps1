@@ -26,7 +26,7 @@ try {
     Set-Variable -Name helpAndManualPath -Value "$WORKING_DIRECTORY\HelpAndManualMinimal"
     
     # Project Paths
-    Set-Variable -Name sourcePath -Value "$WORKING_DIRECTORY\oasys-combined\xdisp\help"
+    Set-Variable -Name sourcePath -Value "$WORKING_DIRECTORY\oasys-combined\$project\help"
     Set-Variable -Name skinPath -Value "$WORKING_DIRECTORY\oasys-helpandmanual-skin"
     Set-Variable -Name outputPath -Value "$sourcePath\output"
     
