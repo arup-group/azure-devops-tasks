@@ -10,6 +10,13 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: QueryAzureDevOpsExtensionVersion@2
+  inputs:
+    connectTo: 'VsTeam'
+    connectedServiceName: 'publish extension'
+    publisherId: 'ArupGroup'
+    extensionId: 'installer-create-task'
+    versionAction: 'Patch'
 - task: PublishAzureDevOpsExtension@2
   displayName: publishExtension
   inputs:
