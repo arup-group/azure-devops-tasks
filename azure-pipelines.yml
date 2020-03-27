@@ -23,5 +23,6 @@ steps:
     connectTo: 'VsTeam'
     connectedServiceName: 'publish extension'
     fileType: 'manifest'
+    extensionVersion: 'Extension.Version'
     updateTasksVersionType: 'patch'
     shareWith: 'oasys-software'
