@@ -61,7 +61,7 @@ try {
     $p=Start-Process "${helpAndManualPath}\${hnmexe}" -ArgumentList "$sourcePath\$helpProject /stdout /CHM=${outputPath}\${chmFileName} /O=${skinPath}\${skinFile} /I=CHM,${chmOptions} /V=${sourcePath}\${projectVariables} /PDF=${outputPath}\${pdfFileName} /TEMPLATE=${sourcePath}\${pdfTemplate} /V=${sourcePath}\${projectVariables} /L=${outputPath}\${logFile}" -Wait -PassThru
     $p.WaitForExit()
 
-    Copy-Item -Filter *.chm -Path "oasys-combined\$project\help\output" -Destination "oasys-combined\gsa-assembler\$project-$majorNumber.$minorNumber\TARGETDIR\Program Files\Oasys\$projectDisplayName $majorNumber.$minorNumber" -recurse -Force -Container:$false
+    Get-ChildItem -Filter *.chm -Path "oasys-combined\$project\help\output" -Recurse -Force | Copy-Item -Destination "oasys-combined\gsa-assembler\$project-$majorNumber.$minorNumber\TARGETDIR\Program Files\Oasys\$projectDisplayName $majorNumber.$minorNumber"
    }
 
    Write-Output "Copying DLLs"
