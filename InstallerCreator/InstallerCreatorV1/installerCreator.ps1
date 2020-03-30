@@ -13,11 +13,13 @@ try {
    $majorNumber = [string]$sourceBranch.split("_")[1]
    $minorNumber = [string]$sourceBranch.split("_")[2]
    $buildNumber = [string]$sourceBranch.split("_")[3]
-   
-   Set-Location -Path $sourcesDirectory
-   Write-Output "Delete old installer directory"
-   Get-ChildItem -Path oasys-combined\gsa-assembler -Recurse | Remove-Item -force -recurse
-   Remove-Item oasys-combined\gsa-assembler -Force 
+
+   Write-Output "Delete old installer directory if it exists"
+   If (Test-Path -Path "$sourcesDirectory\oasys-combined\gsa-assembler" -PathType Container) {
+    Set-Location -Path $sourcesDirectory
+    Get-ChildItem -Path oasys-combined\gsa-assembler -Recurse | Remove-Item -force -recurse
+    Remove-Item oasys-combined\gsa-assembler -Force 
+   }
 
    Write-Output "Copying Installer"
    Copy-Item -Path oasys-windows-installer -Destination oasys-combined\gsa-assembler -recurse -Force 
