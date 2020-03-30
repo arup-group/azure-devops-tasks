@@ -61,13 +61,13 @@ try {
     $p=Start-Process "${helpAndManualPath}\${hnmexe}" -ArgumentList "$sourcePath\$helpProject /stdout /CHM=${outputPath}\${chmFileName} /O=${skinPath}\${skinFile} /I=CHM,${chmOptions} /V=${sourcePath}\${projectVariables} /PDF=${outputPath}\${pdfFileName} /TEMPLATE=${sourcePath}\${pdfTemplate} /V=${sourcePath}\${projectVariables} /L=${outputPath}\${logFile}" -Wait -PassThru
     $p.WaitForExit()
 
-    Copy-Item -Filter *.chm -Path "oasys-combined\$project\help\output" -Destination "oasys-combined\gsa-assembler\$project-$majorNumber.$minorNumber\TARGETDIR\Program Files\Oasys\$projectDisplayName $majorNumber.$minorNumber" -recurse -Force 
+    Copy-Item -Filter *.chm -Path "oasys-combined\$project\help\output" -Destination "oasys-combined\gsa-assembler\$project-$majorNumber.$minorNumber\TARGETDIR\Program Files\Oasys\$projectDisplayName $majorNumber.$minorNumber" -recurse -Force -Container:$false
    }
 
    Write-Output "Copying DLLs"
    Get-Content $sourcesDirectory\oasys-combined\gsa-assembler\$project-$majorNumber.$minorNumber\batchfiles\programs64.txt |  ForEach-Object {Copy-Item -Path "$sourcesDirectory\oasys-combined\$project\programs64\$_" -Destination "$sourcesDirectory\oasys-combined\gsa-assembler\$project-$majorNumber.$minorNumber\TARGETDIR\Program Files\Oasys\$projectDisplayName $majorNumber.$minorNumber"}
 
-   Write-Output "Running Insaller"
+   Write-Output "Running Installer"
    c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDir/oasys-combined/gsa-assembler && ./update_release_version.sh -product $project -major $majorNumber -minor $minorNumber -build $buildNumber"
    c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDir/oasys-combined/gsa-assembler/$project-$majorNumber.$minorNumber && make clean all 2>errors.log && if grep -iq 'error' errors.log; then cat errors.log && exit 1; fi"
 } finally {
