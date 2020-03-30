@@ -15,8 +15,8 @@ try {
    $buildNumber = [string]$sourceBranch.split("_")[3]
 
    Write-Output "Delete old installer directory if it exists"
-   If (Test-Path -Path "$sourcesDirectory\oasys-combined\gsa-assembler" -PathType Container) {
-    Set-Location -Path $sourcesDirectory
+   Set-Location -Path $sourcesDirectory
+   If (Test-Path -Path "oasys-combined\gsa-assembler" -PathType Container) {
     Get-ChildItem -Path oasys-combined\gsa-assembler -Recurse | Remove-Item -force -recurse
     Remove-Item oasys-combined\gsa-assembler -Force 
    }
