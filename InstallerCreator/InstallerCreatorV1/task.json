@@ -12,8 +12,8 @@
     "author": "Arup Group",
     "version": {
         "Major": 1,
-        "Minor": 2,
-        "Patch": 5
+        "Minor": 3,
+        "Patch": 0
     },
     "demands": [
     ],
@@ -65,6 +65,20 @@
             "type": "string",
             "label": "Override Help Project File Name",
             "required": false
+        },
+        {
+            "name": "installerProjectName",
+            "type": "string",
+            "label": "If the project name of the installer files is different add it here",
+            "required": false,
+            "helpMarkDown": "Display Name of the project"
+        },
+        {
+            "name": "installerDirectoryName",
+            "type": "string",
+            "label": "Installer Directory Name",
+            "required": false,
+            "helpMarkDown": "If the Directory name where the installer files is kept is different add it here."
         }
     ],
     "instanceNameFormat": "Build release",
