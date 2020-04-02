@@ -23,13 +23,23 @@
     ],
     "contributions": [
         {
-            "id": "custom-build-release-task",
+            "id": "oasys-installer",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
                 "name": "InstallerCreator/InstallerCreatorV1"
+            }
+        },
+        {
+            "id": "opencppcoverage-installer",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "OpenCpp/OpenCppInstallerV1"
             }
         }
     ]
