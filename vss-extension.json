@@ -16,6 +16,9 @@
     "files": [
         {
             "path": "InstallerCreator/InstallerCreatorV1"
+        },
+        {
+            "path": "OpenCpp/OpenCppInstallerV1"
         }
     ],
     "contributions": [
