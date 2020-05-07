@@ -67,6 +67,7 @@ try {
     $p.WaitForExit()
 
     Get-ChildItem -Filter *.chm -Path "oasys-combined\$project\help\output" -Recurse -Force | Copy-Item -Destination $targetDirectory
+    Get-ChildItem -Filter *.pdf -Path "oasys-combined\$project\help\output" -Recurse -Force | Copy-Item -Destination $targetDirectory
    }
 
    Write-Output "Copying DLLs"
