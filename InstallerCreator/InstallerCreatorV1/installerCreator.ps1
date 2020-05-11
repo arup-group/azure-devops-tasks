@@ -66,7 +66,7 @@ try {
     $p=Start-Process "${helpAndManualPath}\${hnmexe}" -ArgumentList "$sourcePath\$helpProject /stdout /CHM=${outputPath}\${chmFileName} /O=${skinPath}\${skinFile} /I=CHM,${chmOptions} /V=${sourcePath}\${projectVariables} /PDF=${outputPath}\${pdfFileName} /TEMPLATE=${sourcePath}\${pdfTemplate} /V=${sourcePath}\${projectVariables} /L=${outputPath}\${logFile}" -Wait -PassThru
     $p.WaitForExit()
 
-    Get-ChildItem -Filter *.chm -Path "oasys-combined\$project\hel}p\output" -Recurse -Force | Copy-Item -Destination $targetDirectory
+    Get-ChildItem -Filter *.chm -Path "oasys-combined\$project\help\output" -Recurse -Force | Copy-Item -Destination $targetDirectory
     Get-ChildItem -Filter *.pdf -Path "oasys-combined\$project\help\output" -Recurse -Force | Copy-Item -Destination "$targetDirectory\Docs"
    }
 
