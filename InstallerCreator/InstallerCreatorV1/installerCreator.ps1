@@ -71,7 +71,7 @@ try {
    }
 
    Write-Output "Copying DLLs"
-   Get-Content $installerDirectory\batchfiles\programs64.txt |  ForEach-Object {Copy-Item -Path "$sourcesDirectory\oasys-combined\$project\programs64\$_" -Destination $targetDirectory}
+   Get-Content $installerDirectory\batchfiles\programs64.txt |  ForEach-Object {Copy-Item -Recurse -Path "$sourcesDirectory\oasys-combined\$project\programs64\$_" -Destination $targetDirectory}
 
    Write-Output "Running Installer"
    c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDir/oasys-combined/gsa-assembler && ./update_release_version.sh -product $installerDirectoryName -major $majorNumber -minor $minorNumber -build $buildNumber"
