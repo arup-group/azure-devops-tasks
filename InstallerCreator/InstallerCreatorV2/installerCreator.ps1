@@ -4,13 +4,7 @@ param()
 Trace-VstsEnteringInvocation $MyInvocation
 try {
 
-   $versionInfo = $(Get-Item $sourcesDirectory\oasys-combined\$project\programs64\$project.exe).VersionInfo
-   $fullVersion = [array]$versionInfo.FileVersion.split('.')
-   $productVersion = [array]$versionInfo.ProductVersion.split('.')
 
-   If($fullVersion.Length -ne 4 -or $productVersion.Length -ne 2) {
-     Write-Error "FileVersion should be 4 digits and product version should be 2 digits long in $product.exe"
-   }
 
 
    [string]$sourcesDirectory = Get-VstsTaskVariable -Name "Build.SourcesDirectory"
@@ -19,6 +13,9 @@ try {
    $linuxDir=[string]$sourcesDirectory -replace [regex]::Escape("C:\"), "/c/"
    $linuxDir=[string]$linuxDir -replace [regex]::Escape("\"), "/"
    $project = [string]$projectDisplayName.ToLower()
+   $versionInfo = $(Get-Item $sourcesDirectory\oasys-combined\$project\programs64\$project.exe).VersionInfo
+   $fullVersion = [array]$versionInfo.FileVersion.split('.')
+   $productVersion = [array]$versionInfo.ProductVersion.split('.')
    $majorNumber = [string]$fullVersion[0]
    $minorNumber = [string]$fullVersion[1]
    $buildNumber = [string]$fullVersion[3]
@@ -27,6 +24,10 @@ try {
 
    $targetDirectory = "$sourcesDirectory\oasys-combined\gsa-assembler\$installerDirectoryName-$majorNumber.$minorNumber\TARGETDIR\Program Files\Oasys\$installerProjectName $majorNumber.$minorNumber"
    $installerDirectory = "$sourcesDirectory\oasys-combined\gsa-assembler\$installerDirectoryName-$majorNumber.$minorNumber"
+
+   If($fullVersion.Length -ne 4 -or $productVersion.Length -ne 2) {
+    Write-Error "FileVersion should be 4 digits and product version should be 2 digits long in $product.exe"
+   }
 
 
    Write-Output "Delete old installer directory if it exists"
