@@ -1,8 +1,8 @@
 {
     "id": "8ba92121-77ca-4742-a7fa-b70a032011e7",
-    "name": "OasysRelease",
-    "friendlyName": "OasysRelease",
-    "description": "Build an Oasys Release",
+    "name": "OasysReleaseV2",
+    "friendlyName": "OasysReleaseV2",
+    "description": "Build an Oasys Release (Version 2)",
     "helpUrl": "https://github.com/arup-group/azure-devops-tasks/",
     "helpMarkDown": "[Learn more about this task](https://github.com/arup-group/azure-devops-tasks/blob/master/README.md)",
     "category": "Build",
@@ -13,7 +13,7 @@
     "version": {
         "Major": 2,
         "Minor": 0,
-        "Patch": 0
+        "Patch": 1
     },
     "demands": [
     ],
