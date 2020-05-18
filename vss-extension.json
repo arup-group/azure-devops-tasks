@@ -36,7 +36,7 @@
             }
         },
         {
-            "id": "oasys-installer",
+            "id": "oasys-installerv2",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
