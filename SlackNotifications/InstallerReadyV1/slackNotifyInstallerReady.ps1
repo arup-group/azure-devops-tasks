@@ -3,7 +3,7 @@ param()
 
 Trace-VstsEnteringInvocation $MyInvocation
 try {
-  [string]$projectName = Get-VstsInput -Name projectDirectory
+  [string]$projectName = Get-VstsInput -Name projectName
   [string]$tagExists = Get-VstsTaskVariable -Name TAG_EXISTS
   [string]$tagNumbersOnlyDot = Get-VstsTaskVariable -Name TAG_NUMBERS_ONLY_DOT
   [string]$underscoreSeparatedTag = Get-VstsTaskVariable -Name UNDERSCORE_SEPARATED_TAG

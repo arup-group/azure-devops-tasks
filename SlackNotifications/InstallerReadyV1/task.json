@@ -12,7 +12,7 @@
   "author": "Arup Group",
   "version": {
       "Major": 1,
-      "Minor": 0,
+      "Minor": 1,
       "Patch": 0
   },
   "demands": [
@@ -24,6 +24,16 @@
           "displayName": "Advanced",
           "isExpanded": false
       }
+  ],
+  "inputs": [
+    {
+        "name": "projectName",
+        "type": "string",
+        "label": "Name of project to include in message",
+        "defaultValue": "",
+        "required": true,
+        "helpMarkDown": "Name to include in slack message"
+    }
   ],
   "instanceNameFormat": "Build release",
   "execution": {
