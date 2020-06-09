@@ -1,0 +1,55 @@
+{
+  "id": "955fd19a-12f2-47a3-9c29-a6f6b27c713f",
+  "name": "SplitBuildNumbers",
+  "friendlyName": "SplitBuildNumbers Installer",
+  "description": "Split build numbers into environment variables",
+  "helpUrl": "https://github.com/arup-group/azure-devops-tasks/",
+  "helpMarkDown": "[Learn more about this task](https://github.com/arup-group/azure-devops-tasks/blob/master/README.md)",
+  "category": "Build",
+  "visibility": [
+      "Build"
+  ],
+  "author": "Arup Group",
+  "version": {
+      "Major": 1,
+      "Minor": 0,
+      "Patch": 0
+  },
+  "demands": [
+  ],
+  "minimumAgentVersion": "1.95.0",
+  "groups": [
+      {
+          "name": "advanced",
+          "displayName": "Advanced",
+          "isExpanded": false
+      }
+  ],
+  "inputs": [
+    {
+        "name": "projectDirectory",
+        "type": "string",
+        "label": "Sub-folder for this project",
+        "defaultValue": "",
+        "required": true,
+        "helpMarkDown": "Sub-folder of the `oasys-combined` repository"
+    },
+    {
+        "name": "exeName",
+        "type": "string",
+        "label": "Name of application executable (without .exe)",
+        "defaultValue": "",
+        "required": true,
+        "helpMarkDown": "The name of the exe e.g. `safe` not `safe.exe`"
+    }
+  ],
+  "instanceNameFormat": "Split build numbers",
+  "execution": {
+      "PowerShell3": {
+          "target": "splitBuildNumbers.ps1",
+          "platforms": [
+              "windows"
+          ]
+      }
+  }
+}
