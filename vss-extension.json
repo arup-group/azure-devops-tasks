@@ -25,6 +25,9 @@
         },
         {
             "path": "SplitBuildNumbers/SplitBuildNumbersV1"
+        },
+        {
+            "path": "SlackNotifications/InstallerReadyV1"
         }
     ],
     "contributions": [
@@ -67,6 +70,16 @@
             "properties": {
                 "name": "SplitBuildNumbers/SplitBuildNumbersV1"
             }
+        },
+        {
+            "id": "split-tag-into-variables",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "SlackNotifications/InstallerReadyV1"
+            } 
         }
     ]
 }

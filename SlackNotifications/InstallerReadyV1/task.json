@@ -1,0 +1,37 @@
+{
+  "id": "455fd19a-12f2-47a3-9c29-a6f6b27c713f",
+  "name": "SlackInstallerReady",
+  "friendlyName": "Slack Notifier that installer is ready",
+  "description": "Send a message to slack with the details of installer",
+  "helpUrl": "https://github.com/arup-group/azure-devops-tasks/",
+  "helpMarkDown": "[Learn more about this task](https://github.com/arup-group/azure-devops-tasks/blob/master/README.md)",
+  "category": "Build",
+  "visibility": [
+      "Build"
+  ],
+  "author": "Arup Group",
+  "version": {
+      "Major": 1,
+      "Minor": 0,
+      "Patch": 0
+  },
+  "demands": [
+  ],
+  "minimumAgentVersion": "1.95.0",
+  "groups": [
+      {
+          "name": "advanced",
+          "displayName": "Advanced",
+          "isExpanded": false
+      }
+  ],
+  "instanceNameFormat": "Build release",
+  "execution": {
+      "PowerShell3": {
+          "target": "slackNotifyInstallerReady.ps1",
+          "platforms": [
+              "windows"
+          ]
+      }
+  }
+}
