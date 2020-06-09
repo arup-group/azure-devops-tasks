@@ -7,7 +7,7 @@ try {
   [string]$tagExists = Get-VstsTaskVariable -Name TAG_EXISTS
   [string]$tagNumbersOnlyDot = Get-VstsTaskVariable -Name TAG_NUMBERS_ONLY_DOT
   [string]$underscoreSeparatedTag = Get-VstsTaskVariable -Name UNDERSCORE_SEPARATED_TAG
-  [string]$buildId = Get-VstsTaskVariable -Name Build.BuildId
+  [string]$buildId = Get-VstsTaskVariable -Name "Build.BuildId"
   [string]$webhook = Get-VstsInput -Name webhook
   $uriSlack = "https://hooks.slack.com/services/".$webhook
   $text = "Installers ready for $projectName version $tagNumbersOnlyDot -> https://github.com/arup-group/oasys-combined/releases"

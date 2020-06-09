@@ -5,6 +5,7 @@ Trace-VstsEnteringInvocation $MyInvocation
 try {
   [string]$projectDirectory = Get-VstsInput -Name projectDirectory
   [string]$exeName = Get-VstsInput -Name exeName
+  [string]$sourcesDirectory = Get-VstsTaskVariable -Name "Build.SourcesDirectory"
   $versionInfo = $(Get-Item $sourcesDirectory\oasys-combined\$projectDirectory\programs64\$exeName).VersionInfo
   $fullVersion = [array]$versionInfo.FileVersion.split('.')
   $currentTime = $(Get-Date -Format "dddd MM/dd/yyyy HH:mm")
