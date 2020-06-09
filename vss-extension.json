@@ -54,6 +54,16 @@
             "properties": {
                 "name": "OpenCpp/OpenCppInstallerV1"
             }
+        },
+        {
+            "id": "split-tag-into-variables",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "SplitBuildNumbers/SplitBuildNumbersV1"
+            }
         }
     ]
 }
