@@ -15,8 +15,12 @@ try {
   $uppercase = $exeName.ToUpper()
 
   $tag = [array]@($uppercase,$majorVersion,$minorVersion,$spVersion,$buildNumber)
+  $tagNumbersOnly = [array]@($majorVersion,$minorVersion,$spVersion,$buildNumber)
+
   $dotSeparatedTag = [system.String]::Join(".", $tag)
   $underscoreSeparatedTag = [system.String]::Join("_", $tag)
+  $tagNumbersOnlyUnderscore = [system.String]::Join("_", $tagNumbersOnly)
+  $tagNumbersOnlydot = [system.String]::Join(".", $tagNumbersOnly)
 
   Write-VstsSetVariable -Name CI_MAJOR_NUMBER -Value $majorVersion
   Write-VstsSetVariable -Name CI_MINOR_NUMBER -Value $minorVersion
@@ -25,6 +29,9 @@ try {
   Write-VstsSetVariable -Name CURRENT_DATE -Value $currentTime
   Write-VstsSetVariable -Name DOT_SEPARATED_TAG -Value $dotSeparatedTag
   Write-VstsSetVariable -Name UNDERSCORE_SEPARATED_TAG -Value $underscoreSeparatedTag
+  Write-VstsSetVariable -Name TAG_NUMBERS_ONLY_UNDERSCORE -Value $tagNumbersOnlyUnderscore
+  Write-VstsSetVariable -Name TAG_NUMBERS_ONLY_DOT -Value $tagNumbersOnlydot
+
 } finally {
   Trace-VstsLeavingInvocation $MyInvocation
 }
