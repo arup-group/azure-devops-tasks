@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "installer-create-task",
     "name": "Oasys Installer Create Task",
-    "version": "0.0.10",
+    "version": "0.0.34",
     "publisher": "ArupGroup",
     "targets": [
         {
@@ -22,6 +22,9 @@
         },
         {
             "path": "OpenCpp/OpenCppInstallerV1"
+        },
+        {
+            "path": "SplitBuildNumbers/SplitBuildNumbersV1"
         }
     ],
     "contributions": [
