@@ -12,7 +12,7 @@
   "author": "Arup Group",
   "version": {
       "Major": 1,
-      "Minor": 1,
+      "Minor": 2,
       "Patch": 0
   },
   "demands": [
@@ -33,6 +33,14 @@
         "defaultValue": "",
         "required": true,
         "helpMarkDown": "Name to include in slack message"
+    },
+    {
+        "name": "webhook",
+        "type": "string",
+        "label": "Unique webhook to slack channel",
+        "defaultValue": "",
+        "required": true,
+        "helpMarkDown": "Unique webhook name"
     }
   ],
   "instanceNameFormat": "Build release",
