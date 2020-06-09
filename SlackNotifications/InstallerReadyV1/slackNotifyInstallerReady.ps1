@@ -9,7 +9,7 @@ try {
   [string]$underscoreSeparatedTag = Get-VstsTaskVariable -Name UNDERSCORE_SEPARATED_TAG
   [string]$buildId = Get-VstsTaskVariable -Name "Build.BuildId"
   [string]$webhook = Get-VstsInput -Name webhook
-  $uriSlack = "https://hooks.slack.com/services/".$webhook
+  $uriSlack = "https://hooks.slack.com/services/$webhook"
   $text = "Installers ready for $projectName version $tagNumbersOnlyDot -> https://github.com/arup-group/oasys-combined/releases"
   if($tagExists -eq "true"){$text = "Tag $underscoreSeparatedTag for slope exists. Update RC files. Build -> https://dev.azure.com/oasys-software/OASYS%20libraries/_build/results?buildId=$buildId"}
   $body = ConvertTo-Json @{text = $text}
