@@ -72,7 +72,7 @@
             }
         },
         {
-            "id": "split-tag-into-variables",
+            "id": "slack-notifications-installer-ready",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
