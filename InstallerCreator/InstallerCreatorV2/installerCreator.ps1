@@ -18,6 +18,7 @@ try {
    $productVersion = [array]$versionInfo.ProductVersion.split('.')
    $majorNumber = [string]$fullVersion[0]
    $minorNumber = [string]$fullVersion[1]
+   $spNumber    = [string]$fullVersion[2]
    $buildNumber = [string]$fullVersion[3]
    [string]$installerProjectName = Get-VstsInput -Name installerProjectName -Default $projectDisplayName
    [string]$installerDirectoryName = Get-VstsInput -Name installerDirectoryName -Default $project
@@ -85,7 +86,7 @@ try {
    Get-Content $installerDirectory\batchfiles\programs64.txt |  ForEach-Object {Copy-Item -Recurse -Path "$sourcesDirectory\oasys-combined\$project\programs64\$_" -Destination $targetDirectory}
 
    Write-Output "Running Installer"
-   c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDir/oasys-combined/gsa-assembler && ./update_release_version.sh -product $installerDirectoryName -major $majorNumber -minor $minorNumber -build $buildNumber"
+   c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDir/oasys-combined/gsa-assembler && ./update_release_version.sh -product $installerDirectoryName -major $majorNumber -minor $minorNumber -build $buildNumber -sp $spNumber"
    c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDir/oasys-combined/gsa-assembler/$installerDirectoryName-$majorNumber.$minorNumber && make clean all 2>errors.log && if grep -iq 'error' errors.log; then cat errors.log && exit 1; fi"
 } finally {
   Trace-VstsLeavingInvocation $MyInvocation
