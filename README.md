@@ -1,6 +1,6 @@
 # OasysRelease Task for Azure Devops Pipelines
 
-There are two version available:
+There are three version available:
 
 - `InstallerCreatorv1`
   - Currently used for GSA and AdSec.  
@@ -10,6 +10,8 @@ There are two version available:
   - Currently used for all of the Geo programs.  
   - Does use the SP number in builds.  
   - The version numbers are obtained by looking at the properties of the program executable.
+- `InstallerCreatorv3`
+  - An update to `InstallerCreatorV2`.  The _programs64.txt_ list of files required to build an installer is now referenced directly from the _oasys-combined_ repo rather than from the _oasys-windows-installer_ one.  This ensures that the list of files required to build an installer for a program is versioned alongside the code for that program.
 
 ## IMPORTANT - After making changes
 After making changes, it's important to update the task version in the relevant `task.json` file. For example:

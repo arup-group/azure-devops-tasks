@@ -1,0 +1,93 @@
+[CmdletBinding()]
+param()
+
+Trace-VstsEnteringInvocation $MyInvocation
+try {
+
+
+
+
+   [string]$sourcesDirectory = Get-VstsTaskVariable -Name "Build.SourcesDirectory"
+   [string]$projectDisplayName = Get-VstsInput -Name projectDisplayName
+   [string]$buildHelp = Get-VstsInput -Name buildHelp
+   $linuxDir=[string]$sourcesDirectory -replace [regex]::Escape("C:\"), "/c/"
+   $linuxDir=[string]$linuxDir -replace [regex]::Escape("\"), "/"
+   $project = [string]$projectDisplayName.ToLower()
+   $versionInfo = $(Get-Item $sourcesDirectory\oasys-combined\$project\programs64\$project.exe).VersionInfo
+   $fullVersion = [array]$versionInfo.FileVersion.split('.')
+   $productVersion = [array]$versionInfo.ProductVersion.split('.')
+   $majorNumber = [string]$fullVersion[0]
+   $minorNumber = [string]$fullVersion[1]
+   $spNumber    = [string]$fullVersion[2]
+   $buildNumber = [string]$fullVersion[3]
+   [string]$installerProjectName = Get-VstsInput -Name installerProjectName -Default $projectDisplayName
+   [string]$installerDirectoryName = Get-VstsInput -Name installerDirectoryName -Default $project
+
+   $targetDirectory = "$sourcesDirectory\oasys-combined\gsa-assembler\$installerDirectoryName-$majorNumber.$minorNumber\TARGETDIR\Program Files\Oasys\$installerProjectName $majorNumber.$minorNumber"
+   $installerDirectory = "$sourcesDirectory\oasys-combined\gsa-assembler\$installerDirectoryName-$majorNumber.$minorNumber"
+
+   If($fullVersion.Length -ne 4 -or $productVersion.Length -ne 2) {
+    Write-Error "FileVersion should be 4 digits and product version should be 2 digits long in $product.exe"
+   }
+
+
+   Write-Output "Delete old installer directory if it exists"
+   Set-Location -Path $sourcesDirectory
+   If (Test-Path -Path "oasys-combined\gsa-assembler" -PathType Container) {
+    Get-ChildItem -Path oasys-combined\gsa-assembler -Recurse | Remove-Item -force -recurse
+    Remove-Item oasys-combined\gsa-assembler -Force 
+   }
+
+   Write-Output "Copying Installer"
+   Copy-Item -Path oasys-windows-installer -Destination oasys-combined\gsa-assembler -recurse -Force 
+
+
+   If ($buildHelp -eq "yes") {
+    Set-Variable  -Name WORKING_DIRECTORY -Value ${pwd}
+    
+    # Help and Manual Settings
+    Set-Variable -Name helpAndManualPath -Value "$WORKING_DIRECTORY\HelpAndManualMinimal"
+    
+    # Project Paths
+    Set-Variable -Name sourcePath -Value "$WORKING_DIRECTORY\oasys-combined\$project\help"
+    Set-Variable -Name skinPath -Value "$WORKING_DIRECTORY\oasys-helpandmanual-skin"
+    Set-Variable -Name outputPath -Value "$sourcePath\output"
+    
+    # Project Settings
+    [string]$helpFileOverride = Get-VstsInput -Name helpFileOverride -Default "$project.hmxp"
+    Set-Variable -Name helpProject -Value $helpFileOverride
+    Set-Variable -Name skinFile -Value Oasys.hmskin
+    Set-Variable -Name logFile -Value "$project.log"
+    Set-Variable -Name projectVariables -Value project_variables.txt
+    
+    # CHM Settings
+    Set-Variable -Name chmFileName -Value "$projectDisplayName.chm"
+    Set-Variable -Name chmOptions -Value "PRODUCT_${project.toUpper()}"
+    
+    # PDF Settings
+    Set-Variable -Name pdfFileName -Value "${projectDisplayName}${majorNumber}.${minorNumber}_Manual.pdf"
+    Set-Variable -Name pdfTemplate -Value "oasys_$project.mnl"
+    
+    # HnM Executable
+    Set-Variable -Name hnmexe -Value HELPMAN.EXE
+
+
+    Set-Content -Path "oasys-combined\$project\help\project_variables.txt" -Value "VERSION=$majorNumber.$minorNumber`r`nPROGRAM=$projectDisplayName"
+    # Working directory
+    Write-Output "Building Help files"
+    $p=Start-Process "${helpAndManualPath}\${hnmexe}" -ArgumentList "$sourcePath\$helpProject /stdout /CHM=${outputPath}\${chmFileName} /O=${skinPath}\${skinFile} /I=CHM,${chmOptions} /V=${sourcePath}\${projectVariables} /PDF=${outputPath}\${pdfFileName} /TEMPLATE=${sourcePath}\${pdfTemplate} /V=${sourcePath}\${projectVariables} /L=${outputPath}\${logFile}" -Wait -PassThru
+    $p.WaitForExit()
+
+    Get-ChildItem -Filter *.chm -Path "oasys-combined\$project\help\output" -Recurse -Force | Copy-Item -Destination $targetDirectory
+    Get-ChildItem -Filter *.pdf -Path "oasys-combined\$project\help\output" -Recurse -Force | Copy-Item -Destination "$targetDirectory\Docs"
+   }
+
+   Write-Output "Copying DLLs"
+   Get-Content $sourcesDirectory\oasys-combined\$project\build\programs64.txt |  ForEach-Object {Copy-Item -Recurse -Path "$sourcesDirectory\oasys-combined\$project\programs64\$_" -Destination $targetDirectory}
+
+   Write-Output "Running Installer"
+   c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDir/oasys-combined/gsa-assembler && ./update_release_version.sh -product $installerDirectoryName -major $majorNumber -minor $minorNumber -build $buildNumber -sp $spNumber"
+   c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDir/oasys-combined/gsa-assembler/$installerDirectoryName-$majorNumber.$minorNumber && make clean all 2>errors.log && if grep -iq 'error' errors.log; then cat errors.log && exit 1; fi"
+} finally {
+  Trace-VstsLeavingInvocation $MyInvocation
+}
