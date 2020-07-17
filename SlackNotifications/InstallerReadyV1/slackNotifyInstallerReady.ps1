@@ -11,7 +11,7 @@ try {
   [string]$webhook = Get-VstsInput -Name webhook
   $uriSlack = "https://hooks.slack.com/services/$webhook"
   $text = "Installers ready for $projectName version $tagNumbersOnlyDot -> https://github.com/arup-group/oasys-combined/releases"
-  if($tagExists -eq "true"){$text = "Tag $underscoreSeparatedTag for slope exists. Update RC files. Build -> https://dev.azure.com/oasys-software/OASYS%20libraries/_build/results?buildId=$buildId"}
+  if($tagExists -eq "true"){$text = "Tag $underscoreSeparatedTag for $projectName already exists. Update RC files with FileVersion $tagNumbersOnlyDot. Build -> https://dev.azure.com/oasys-software/OASYS%20libraries/_build/results?buildId=$buildId"}
   $body = ConvertTo-Json @{text = $text}
   Invoke-RestMethod -uri $uriSlack -Method Post -body $body -ContentType 'application/json' | Out-Null
 } finally {
