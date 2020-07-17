@@ -30,7 +30,7 @@
             "path": "SplitBuildNumbers/SplitBuildNumbersV1"
         },
         {
-            "path": "SlackNotifications/InstallerReadyV1"
+            "path": "SlackNotifications/SlackNotificationV1"
         }
     ],
     "contributions": [
@@ -91,7 +91,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "SlackNotifications/InstallerReadyV1"
+                "name": "SlackNotifications/SlackNotificationV1"
             } 
         }
     ]
