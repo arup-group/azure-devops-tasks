@@ -65,7 +65,7 @@ try {
     Set-Variable -Name chmOptions -Value "PRODUCT_${project.toUpper()}"
     
     # PDF Settings
-    Set-Variable -Name pdfFileName -Value "${projectDisplayName}${majorNumber}.${minorNumber}_Manual.pdf"
+    Set-Variable -Name pdfFileName -Value "${installerProjectName}${majorNumber}.${minorNumber}_Manual.pdf"
     Set-Variable -Name pdfTemplate -Value "oasys_$project.mnl"
     
     # HnM Executable
