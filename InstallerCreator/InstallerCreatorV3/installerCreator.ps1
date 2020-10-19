@@ -10,6 +10,7 @@ try {
    [string]$sourcesDirectory = Get-VstsTaskVariable -Name "Build.SourcesDirectory"
    [string]$projectDisplayName = Get-VstsInput -Name projectDisplayName
    [string]$buildHelp = Get-VstsInput -Name buildHelp
+   [string]$includePdf = Get-VstsInput -Name includePdf
    $linuxDir=[string]$sourcesDirectory -replace [regex]::Escape("C:\"), "/c/"
    $linuxDir=[string]$linuxDir -replace [regex]::Escape("\"), "/"
    $project = [string]$projectDisplayName.ToLower()
@@ -79,7 +80,9 @@ try {
     $p.WaitForExit()
 
     Get-ChildItem -Filter *.chm -Path "oasys-combined\$project\help\output" -Recurse -Force | Copy-Item -Destination $targetDirectory
-    Get-ChildItem -Filter *.pdf -Path "oasys-combined\$project\help\output" -Recurse -Force | Copy-Item -Destination "$targetDirectory\Docs"
+    If ($includePdf -eq "yes") {
+      Get-ChildItem -Filter *.pdf -Path "oasys-combined\$project\help\output" -Recurse -Force | Copy-Item -Destination "$targetDirectory\Docs"
+    }
    }
 
    Write-Output "Copying DLLs"
