@@ -1,17 +1,19 @@
 # OasysRelease Task for Azure Devops Pipelines
 
-There are three version available:
+There are four version available:
 
-- `InstallerCreatorv1`
+- `InstallerCreatorV1`
   - Currently used for GSA and AdSec.  
   - Doesn't use the SP number in builds.  
   - The version numbers are obtained by looking at the source path of the build.
-- `InstallerCreatorv2`
+- `InstallerCreatorV2`
   - Currently used for all of the Geo programs.  
   - Does use the SP number in builds.  
   - The version numbers are obtained by looking at the properties of the program executable.
-- `InstallerCreatorv3`
+- `InstallerCreatorV3`
   - An update to `InstallerCreatorV2`.  The _programs64.txt_ list of files required to build an installer is now referenced directly from the _oasys-combined_ repo rather than from the _oasys-windows-installer_ one.  This ensures that the list of files required to build an installer for a program is versioned alongside the code for that program.
+- `InstallerCreatorV4`
+  - An update to `InstallerCreatorV3`.  Code signing now needs to be done with a certificate which is stored in an HSM. Here, we've added the ability to pass a `ClientId` and a `ClientSecret` which are required to access the Azure Key Vault where the cert is kept.  The values are added as arguments to the `make clean all` call which invokes the Wix3 installer building process.
 
 ## IMPORTANT - After making changes
 After making changes, it's important to update the task version in the relevant `task.json` file. For example:

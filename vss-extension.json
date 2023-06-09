@@ -24,6 +24,9 @@
             "path": "InstallerCreator/InstallerCreatorV3"
         },
         {
+            "path": "InstallerCreator/InstallerCreatorV4"
+        },
+        {
             "path": "OpenCpp/OpenCppInstallerV1"
         },
         {
@@ -62,6 +65,16 @@
             ],
             "properties": {
                 "name": "InstallerCreator/InstallerCreatorV3"
+            }
+        },
+        {
+            "id": "oasys-installerv4",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "InstallerCreator/InstallerCreatorV4"
             }
         },
         {
