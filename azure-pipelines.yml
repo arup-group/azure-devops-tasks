@@ -10,23 +10,23 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: TfxInstaller@4
-  inputs:
-    version: "0.x"
-- task: QueryAzureDevOpsExtensionVersion@4
-  inputs:
-    connectTo: 'VsTeam'
-    connectedServiceName: 'publish extension'
-    publisherId: 'ArupGroup'
-    extensionId: 'installer-create-task'
-    versionAction: 'Patch'
-    setBuildNumber: 'true'
-- task: PublishAzureDevOpsExtension@4
-  displayName: publishExtension
-  inputs:
-    connectTo: 'VsTeam'
-    connectedServiceName: 'publish extension'
-    fileType: 'manifest'
-    extensionVersion: '$(QueryAzureDevOpsExtensionVersion.Extension.Version)'
-    updateTasksVersion: false
-    shareWith: 'oasys-software'
+  - task: TfxInstaller@4
+    inputs:
+      version: "0.x"
+  - task: QueryAzureDevOpsExtensionVersion@4
+    inputs:
+      connectTo: 'VsTeam'
+      connectedServiceName: 'publish extension'
+      publisherId: 'ArupGroup'
+      extensionId: 'installer-create-task'
+      versionAction: 'Patch'
+      setBuildNumber: 'true'
+  - task: PublishAzureDevOpsExtension@4
+    displayName: publishExtension
+    inputs:
+      connectTo: 'VsTeam'
+      connectedServiceName: 'publish extension'
+      fileType: 'manifest'
+      extensionVersion: '$(QueryAzureDevOpsExtensionVersion.Extension.Version)'
+      updateTasksVersion: false
+      shareWith: 'oasys-software'
