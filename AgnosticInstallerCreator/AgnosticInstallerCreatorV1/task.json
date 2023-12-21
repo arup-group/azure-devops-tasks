@@ -1,0 +1,112 @@
+{
+    "id": "aba92121-77ca-4742-a7fa-b70a032011e7",
+    "name": "OasysAgnosticReleaseV1",
+    "friendlyName": "OasysAgnosticReleaseV1",
+    "description": "Build an Oasys Release (Version 1)",
+    "helpUrl": "https://github.com/arup-group/azure-devops-tasks/",
+    "helpMarkDown": "[Learn more about this task](https://github.com/arup-group/azure-devops-tasks/blob/master/README.md)",
+    "category": "Build",
+    "visibility": [
+        "Build"
+    ],
+    "author": "Arup Group",
+    "version": {
+        "Major": 1,
+        "Minor": 1,
+        "Patch": 0
+    },
+    "demands": [
+    ],
+    "minimumAgentVersion": "1.95.0",
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": false
+        }
+    ],
+    "inputs": [
+        {
+            "name": "projectDirectory",
+            "type": "string",
+            "label": "Directory of the project within the Build.SourcesDirectory, e.g. src/my-project. Can be an absolute path or a relative path from Build.SourcesDirectory.",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Directory of the project within the SourcesDirectory, e.g. src/my-project. Can be an absolute path or a relative path from Build.SourcesDirectory."
+        },
+        {
+            "name": "projectDisplayName",
+            "type": "string",
+            "label": "Display Name of the project",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Display Name of the project"
+        },
+        {
+            "name": "buildHelp",
+            "type": "radio",
+            "label": "Build Help?",
+            "required": true,
+            "options": {
+                "yes": "Yes",
+                "no": "No"
+            }
+        },
+        {
+            "name": "includePdf",
+            "type": "radio",
+            "label": "Include pdf help in installer?",
+            "defaultValue": "yes",
+            "required": false,
+            "options": {
+                "yes": "Yes",
+                "no": "No"
+            }
+        },
+        {
+            "name": "clientId",
+            "type": "string",
+            "label": "ClientID for accessing Azure Key Vault",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "ClientID for accessing Azure Key Vault holding EV cert"
+        },
+        {
+            "name": "clientSecret",
+            "type": "string",
+            "label": "Client Secret for accessing Azure Key Vault",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "ClientID for accessing Azure Key Vault holding EV cert"
+        },
+        {
+            "name": "helpFileOverride",
+            "type": "string",
+            "label": "Override Help Project File Name",
+            "required": false
+        },
+        {
+            "name": "installerProjectName",
+            "type": "string",
+            "label": "If the project name of the installer files is different add it here",
+            "required": false,
+            "helpMarkDown": "Display Name of the project"
+        },
+        {
+            "name": "installerDirectoryName",
+            "type": "string",
+            "label": "Installer Directory Name",
+            "required": false,
+            "helpMarkDown": "If the Directory name where the installer files is kept is different add it here."
+        }
+    ],
+    "instanceNameFormat": "Build release",
+    "execution": {
+        "PowerShell3": {
+            "target": "AgnosticInstallerCreator.ps1",
+            "platforms": [
+                "windows"
+            ]
+        }
+    }
+}
