@@ -27,12 +27,12 @@
     ],
     "inputs": [
         {
-            "name": "projectDirectory",
+            "name": "projectParentDirectory",
             "type": "string",
-            "label": "Directory of the project within the Build.SourcesDirectory, e.g. src/my-project. Can be an absolute path or a relative path from Build.SourcesDirectory.",
+            "label": "Parent directory of the project within the Build.SourcesDirectory, e.g. src/. Can be an absolute path or a relative path from Build.SourcesDirectory.",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Directory of the project within the SourcesDirectory, e.g. src/my-project. Can be an absolute path or a relative path from Build.SourcesDirectory."
+            "helpMarkDown": "Parent directory of the project within the SourcesDirectory, e.g. src/. Can be an absolute path or a relative path from Build.SourcesDirectory."
         },
         {
             "name": "projectDisplayName",

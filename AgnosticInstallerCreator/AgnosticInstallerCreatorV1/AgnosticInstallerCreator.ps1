@@ -4,10 +4,10 @@ param()
 Trace-VstsEnteringInvocation $MyInvocation
 try {
   [string]$sourcesDirectory = Get-VstsTaskVariable -Name "Build.SourcesDirectory"
-  [string]$projectDirectory = Get-VstsInput -Name projectDirectory
+  [string]$projectParentDirectory = Get-VstsInput -Name projectParentDirectory
 
-  If($projectDirectory -NotMatch $sourcesDirectory) {
-    $projectDirectory = [string]$sourcesDirectory/$projectDirectory
+  If($projectParentDirectory -NotMatch $sourcesDirectory) {
+    $projectParentDirectory = [string]$sourcesDirectory/$projectParentDirectory
   }
 
   [string]$projectDisplayName = Get-VstsInput -Name projectDisplayName
@@ -17,7 +17,7 @@ try {
   [string]$clientSecret = Get-VstsInput -Name clientSecret
 
   $project = [string]$projectDisplayName.ToLower()
-  $versionInfo = $(Get-Item $projectDirectory\programs64\$project.exe).VersionInfo
+  $versionInfo = $(Get-Item $projectParentDirectory\programs64\$project.exe).VersionInfo
   $fullVersion = [array]$versionInfo.FileVersion.split('.')
   $productVersion = [array]$versionInfo.ProductVersion.split('.')
   $majorNumber = [string]$fullVersion[0]
@@ -50,7 +50,7 @@ try {
   Copy-Item -Path oasys-windows-installer -Destination $installerBuilderDirectory -recurse -Force 
 
   If ($buildHelp -eq "yes") {
-    [string]$helpDirectory = "$projectDirectory\help"
+    [string]$helpDirectory = "$projectParentDirectory\$project\help"
     [string]$helpFileOverride = Get-VstsInput -Name helpFileOverride -Default "$project.hmxp"
 
     # Help and Manual Settings
@@ -96,8 +96,8 @@ try {
   }
 
   Write-Output "Copying DLLs"
-  Get-Content $projectDirectory\build\programs64.txt | `
-    ForEach-Object {Copy-Item -Recurse -Path "$projectDirectory\programs64\$_" -Destination $targetDirectory}
+  Get-Content $projectParentDirectory\$project\build\programs64.txt | `
+    ForEach-Object {Copy-Item -Recurse -Path "$projectParentDirectory\programs64\$_" -Destination $targetDirectory}
 
   Write-Output "Running Installer"
   c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c `
