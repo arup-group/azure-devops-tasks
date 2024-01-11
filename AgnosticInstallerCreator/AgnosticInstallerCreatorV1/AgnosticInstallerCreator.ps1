@@ -10,13 +10,13 @@ try {
     $projectParentDirectory = [string]$sourcesDirectory/$projectParentDirectory
   }
 
-  [string]$projectDisplayName = Get-VstsInput -Name projectDisplayName
+  [string]$projectName = Get-VstsInput -Name projectName
   [string]$buildHelp = Get-VstsInput -Name buildHelp
   [string]$includePdf = Get-VstsInput -Name includePdf
   [string]$clientId = Get-VstsInput -Name clientId
   [string]$clientSecret = Get-VstsInput -Name clientSecret
 
-  $project = [string]$projectDisplayName.ToLower()
+  $project = [string]$projectName.ToLower()
   $versionInfo = $(Get-Item $projectParentDirectory\programs64\$project.exe).VersionInfo
   $fullVersion = [array]$versionInfo.FileVersion.split('.')
   $productVersion = [array]$versionInfo.ProductVersion.split('.')
@@ -25,7 +25,7 @@ try {
   $spNumber    = [string]$fullVersion[2]
   $buildNumber = [string]$fullVersion[3]
 
-  [string]$installerProjectName = Get-VstsInput -Name installerProjectName -Default $projectDisplayName
+  [string]$installerProjectName = Get-VstsInput -Name installerProjectName -Default $projectName
   [string]$installerDirectoryName = Get-VstsInput -Name installerDirectoryName -Default $project
   [string]$installerBuilderDirectory = "$sourcesDirectory\installer-builder\"
 
@@ -67,7 +67,7 @@ try {
     Set-Variable -Name projectVariables -Value project_variables.txt
 
     # CHM Settings
-    Set-Variable -Name chmFileName -Value "$projectDisplayName.chm"
+    Set-Variable -Name chmFileName -Value "$projectName.chm"
     Set-Variable -Name chmOptions -Value "PRODUCT_${project.toUpper()}"
 
     # PDF Settings
@@ -78,7 +78,7 @@ try {
     Set-Variable -Name hnmexe -Value HELPMAN.EXE
 
     Set-Content -Path "$helpDirectory\project_variables.txt" `
-      -Value "VERSION=$majorNumber.$minorNumber`r`nPROGRAM=$projectDisplayName"
+      -Value "VERSION=$majorNumber.$minorNumber`r`nPROGRAM=$projectName"
 
     # Working directory
     Write-Output "Building Help files"

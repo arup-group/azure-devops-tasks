@@ -30,22 +30,20 @@
             "name": "projectParentDirectory",
             "type": "string",
             "label": "Parent directory of the project within the Build.SourcesDirectory, e.g. src/. Can be an absolute path or a relative path from Build.SourcesDirectory.",
-            "defaultValue": "",
             "required": true,
             "helpMarkDown": "Parent directory of the project within the SourcesDirectory, e.g. src/. Can be an absolute path or a relative path from Build.SourcesDirectory."
         },
         {
-            "name": "projectDisplayName",
+            "name": "projectName",
             "type": "string",
-            "label": "Display Name of the project",
-            "defaultValue": "",
+            "label": "Display name of the project",
             "required": true,
-            "helpMarkDown": "Display Name of the project"
+            "helpMarkDown": "Display name of the project"
         },
         {
             "name": "buildHelp",
             "type": "radio",
-            "label": "Build Help?",
+            "label": "Build help?",
             "required": true,
             "options": {
                 "yes": "Yes",
@@ -55,7 +53,7 @@
         {
             "name": "includePdf",
             "type": "radio",
-            "label": "Include pdf help in installer?",
+            "label": "Include help PDF in installer?",
             "defaultValue": "yes",
             "required": false,
             "options": {
@@ -66,10 +64,10 @@
         {
             "name": "clientId",
             "type": "string",
-            "label": "ClientID for accessing Azure Key Vault",
+            "label": "Client ID for accessing Azure Key Vault",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "ClientID for accessing Azure Key Vault holding EV cert"
+            "helpMarkDown": "Client ID for accessing Azure Key Vault holding EV cert"
         },
         {
             "name": "clientSecret",
@@ -77,7 +75,7 @@
             "label": "Client Secret for accessing Azure Key Vault",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "ClientID for accessing Azure Key Vault holding EV cert"
+            "helpMarkDown": "Client secret for accessing Azure Key Vault holding EV cert"
         },
         {
             "name": "helpFileOverride",
@@ -88,16 +86,16 @@
         {
             "name": "installerProjectName",
             "type": "string",
-            "label": "If the project name of the installer files is different add it here",
+            "label": "Display name of the project",
             "required": false,
-            "helpMarkDown": "Display Name of the project"
+            "helpMarkDown": "If the project name of the installer files is different, add it here"
         },
         {
             "name": "installerDirectoryName",
             "type": "string",
-            "label": "Installer Directory Name",
+            "label": "Installer directory name",
             "required": false,
-            "helpMarkDown": "If the Directory name where the installer files is kept is different add it here."
+            "helpMarkDown": "If the directory name where the installer files is kept is different, add it here."
         }
     ],
     "instanceNameFormat": "Build release",
