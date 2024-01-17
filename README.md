@@ -1,5 +1,6 @@
-# OasysRelease Task for Azure Devops Pipelines
+# Tasks for Azure Devops Pipelines
 
+## OasysRelease Tasks
 There are four version available:
 
 - `InstallerCreatorV1`
@@ -14,6 +15,12 @@ There are four version available:
   - An update to `InstallerCreatorV2`.  The _programs64.txt_ list of files required to build an installer is now referenced directly from the _oasys-combined_ repo rather than from the _oasys-windows-installer_ one.  This ensures that the list of files required to build an installer for a program is versioned alongside the code for that program.
 - `InstallerCreatorV4`
   - An update to `InstallerCreatorV3`.  Code signing now needs to be done with a certificate which is stored in an HSM. Here, we've added the ability to pass a `ClientId` and a `ClientSecret` which are required to access the Azure Key Vault where the cert is kept.  The values are added as arguments to the `make clean all` call which invokes the Wix3 installer building process.
+
+## OasysAgnosticRelease Tasks
+
+- `AgnosticInstallerCreatorV1`
+  - Can be used for any application
+  - Functions similarly to `InstallerCreatorV4` except it requires the user to pass in the `projectParentPath`, `repoName` and `fullVersion` of the app.
 
 ## IMPORTANT - After making changes
 After making changes, it's important to update the task version in the relevant `task.json` file. For example:
@@ -35,5 +42,4 @@ Check that the task has been updated in Azure Devops.  Go to `Organization -> Ex
 
 ## Note
 Any re-runs of existing jobs will continue to use the old task.  Instigate a new run if you want to use the new task.
-
 

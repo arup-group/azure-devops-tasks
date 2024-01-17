@@ -27,11 +27,18 @@
     ],
     "inputs": [
         {
-            "name": "projectParentDirectory",
+            "name": "projectParentPath",
             "type": "string",
-            "label": "Parent directory of the project within the Build.SourcesDirectory, e.g. src/. Can be an absolute path or a relative path from Build.SourcesDirectory.",
+            "label": "Parent path of the project",
             "required": true,
-            "helpMarkDown": "Parent directory of the project within the SourcesDirectory, e.g. src/. Can be an absolute path or a relative path from Build.SourcesDirectory."
+            "helpMarkDown": "Parent path of the project within the Build.SourcesDirectory, e.g. oasys-compos/src/compos. Can be an absolute path or a relative path to Build.SourcesDirectory."
+        },
+        {
+            "name": "repoName",
+            "type": "string",
+            "label": "Name of the repo",
+            "required": true,
+            "helpMarkDown": "Name of the repo, e.g. oasys-combined"
         },
         {
             "name": "projectName",
@@ -39,6 +46,13 @@
             "label": "Display name of the project",
             "required": true,
             "helpMarkDown": "Display name of the project"
+        },
+        {
+            "name": "fullVersion",
+            "type": "string",
+            "label": "The full four-numbered version of the application",
+            "required": true,
+            "helpMarkDown": "The full four-numbered version of the application, i.e., <major>.<minor>.<patch>.<build>"
         },
         {
             "name": "buildHelp",
@@ -76,26 +90,6 @@
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "Client secret for accessing Azure Key Vault holding EV cert"
-        },
-        {
-            "name": "helpFileOverride",
-            "type": "string",
-            "label": "Override Help Project File Name",
-            "required": false
-        },
-        {
-            "name": "installerProjectName",
-            "type": "string",
-            "label": "Display name of the project",
-            "required": false,
-            "helpMarkDown": "If the project name of the installer files is different, add it here"
-        },
-        {
-            "name": "installerDirectoryName",
-            "type": "string",
-            "label": "Installer directory name",
-            "required": false,
-            "helpMarkDown": "If the directory name where the installer files is kept is different, add it here."
         }
     ],
     "instanceNameFormat": "Build release",
