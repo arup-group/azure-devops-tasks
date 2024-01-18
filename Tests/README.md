@@ -9,7 +9,7 @@ We have two ways to test a custom task:
 ## 1. References
 
 * [Pester](https://pester.dev/)
-* [VstsTaskSdk Testing and Debugging](powershell/Docs/TestingAndDebugging.md)
+* [VstsTaskSdk Testing and Debugging](https://github.com/microsoft/azure-pipelines-task-lib/blob/master/powershell/Docs/TestingAndDebugging.md)
 
 ## 2. Unit testing with Pester
 

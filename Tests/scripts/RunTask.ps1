@@ -6,7 +6,7 @@ param(
   [string]$dotEnv)
 
 If (!$taskName.EndsWith(".ps1")) {
-  $taskName = "$task.ps1"
+  $taskName = "$taskName.ps1"
 }
 
 $env:SYSTEM_CULTURE='en-UK'
@@ -26,7 +26,7 @@ try {
   }
 
   Write-Host "`nRunning $taskDirectory\$taskName...`n"
-  Invoke-VstsTaskScript -ScriptBlock { . .\$taskName } -Verbose
+  Invoke-VstsTaskScript -ScriptBlock { . .\$taskName }
 } finally {
   Pop-Location
 }
