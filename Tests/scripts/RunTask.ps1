@@ -18,7 +18,7 @@ try {
 
   If ($dotEnv -ne "") {
     Write-Host "`nSetting the following env variables:`n"
-    Get-Content $dotEnv | foreach {
+    Get-Content $dotEnv | ForEach-Object {
         $name, $value = $_.split('=')
         Write-Host $name=$value
         Set-Content env:\$name $value
