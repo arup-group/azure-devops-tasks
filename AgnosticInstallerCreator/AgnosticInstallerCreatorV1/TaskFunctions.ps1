@@ -165,12 +165,12 @@ function CopyDlls {
         [string]$targetDirectory
     )
 
-    $projectPath = "$($taskArgs.ProjectParentPath)\$($taskArgs.ProjectName.ToLower())"
+    $project = $taskArgs.ProjectName.ToLower()
 
     Write-Host "Copying DLLs"
-    Get-Content "$projectPath\build\programs64.txt" | `
+    Get-Content "$($taskArgs.ProjectParentPath)\$project\build\programs64.txt" | `
         ForEach-Object {
-            Copy-Item -Recurse -Path "$projectPath\programs64\$_" -Destination $targetDirectory
+            Copy-Item -Recurse -Path "$($taskArgs.ProjectParentPath)\programs64\$_" -Destination $targetDirectory
         }
 }
 
