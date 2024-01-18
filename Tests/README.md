@@ -27,8 +27,20 @@ Pester is a testing and mocking framework for PowerShell. It is already included
 2. Add unit tests following the [Pester framework](https://pester.dev/docs/quick-start#creating-a-pester-test).  
     The basic structure of a test is like this:
     ```powershell
+
+    # Everything in BeforeAll below is REQUIRED
     BeforeAll {
-        . .\CustomTask\CustomTaskV1\CustomTaskV1.ps1  # Import your task
+        $env:SYSTEM_CULTURE = 'en-UK'               # This must be set or else the test will prompt for an input
+        $parentPath = '.\CustomTask\CustomTaskV1'   # Set the root path to your task
+        Push-Location                               # Records the path where `Invoke-Pester` was called (should be the repo root)
+        Set-Location $parentPath                    # Changes directory to the custom task 
+        . .\CustomTaskV1.ps1                        # Import your task
+        Import-Module .\ps_modules\VstsTaskSdk      # Import the VstsTaskSdk
+    }
+    
+    # Everything in AfterAll below is REQUIRED
+    AfterAll {
+        Pop-Location                                # Changes the directory back to the repo root
     }
 
     Describe 'CustomTaskV1' { 
@@ -38,7 +50,8 @@ Pester is a testing and mocking framework for PowerShell. It is already included
         }
     }
     ```
-    ***Note***: Make sure to import your task relative to the root directory.
+
+    ***Note***: **Everything in BeforeAll and AfterAll is REQUIRED.**
 
     Use `Mock` to mock the `Get-Vsts**` functions in your task, or any function you want.
     ```powershell

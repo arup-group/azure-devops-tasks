@@ -1,8 +1,10 @@
 BeforeAll {
-    $root = ".\AgnosticInstallerCreator\AgnosticInstallerCreatorV1"
+    $env:SYSTEM_CULTURE = 'en-UK'
+    $parentPath = ".\AgnosticInstallerCreator\AgnosticInstallerCreatorV1"
     Push-Location
-    Set-Location $root
-    . ./TaskFunctions.ps1
+    Set-Location $parentPath
+    . .\TaskFunctions.ps1
+    Import-Module .\ps_modules\VstsTaskSdk
 }
 
 AfterAll {
