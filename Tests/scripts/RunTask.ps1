@@ -3,7 +3,8 @@ param(
   [string]$taskDirectory,
   [Parameter(Mandatory=$true)]
   [string]$taskName,
-  [string]$dotEnv)
+  [string]$dotEnv,
+  [switch]$disableInteractive=$false)
 
 If (!$taskName.EndsWith(".ps1")) {
   $taskName = "$taskName.ps1"
@@ -26,7 +27,7 @@ try {
   }
 
   Write-Host "`nRunning $taskDirectory\$taskName...`n"
-  Invoke-VstsTaskScript -ScriptBlock { . .\$taskName }
+  Invoke-VstsTaskScript -ScriptBlock { . .\$taskName } 
 } finally {
   Pop-Location
 }

@@ -77,11 +77,11 @@ Describe 'TaskFunctions' {
         ReadVersion -ErrorVariable errors -ErrorAction SilentlyContinue
         $errors.Count | Should -Be 1
 
-        Mock Get-VstsInput { return "1.2.3" } -ParameterFilter { $Name -eq "fullVersion" }
+        Mock Get-VstsInput { return "1.22.3" } -ParameterFilter { $Name -eq "fullVersion" }
         ReadVersion -ErrorVariable errors -ErrorAction SilentlyContinue
         $errors.Count | Should -Be 1
 
-        Mock Get-VstsInput { return "1.2.3." } -ParameterFilter { $Name -eq "fullVersion" }
+        Mock Get-VstsInput { return "11.2.3." } -ParameterFilter { $Name -eq "fullVersion" }
         ReadVersion -ErrorVariable errors -ErrorAction SilentlyContinue
         $errors.Count | Should -Be 1
 

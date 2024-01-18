@@ -25,7 +25,7 @@ function ReadVersion {
 
     $fullVersion = Get-VstsInput -Name fullVersion
 
-    If ($fullVersion -NotMatch '^\d.\d.\d.\d$') {
+    If ($fullVersion -NotMatch '^\d+.\d+.\d+.\d+$') {
         Write-Error "The version requires four numbers, e.g. 1.2.3.4"
     }
 
