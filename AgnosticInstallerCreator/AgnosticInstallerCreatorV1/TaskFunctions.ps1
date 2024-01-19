@@ -193,11 +193,11 @@ function RunInstaller {
         Write-Host "Running Installer"
 
         Set-Location $installerDirectory
-        c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /usr/bin/bash -l -c ".\update_release_version.sh -product $project `
-                                                                    -major $version.Major -minor $version.Minor `
-                                                                    -sp $version.Patch -build $version.Build"
-        c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /usr/bin/bash -l -c ".\build_installer.sh -product $project `
-                                                            -major $version.Major -minor $version.Minor `
+        c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c ".\update_release_version.sh -product $project `
+                                                                    -major $($version.Major) -minor $($version.Minor) `
+                                                                    -sp $($version.Patch) -build $($version.Build)"
+        c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c ".\build_installer.sh -product $project `
+                                                            -major $($version.Major) -minor $($version.Minor) `
                                                             -clientId $clientId -clientSecret $clientSecret"
     } finally {
         Pop-Location
