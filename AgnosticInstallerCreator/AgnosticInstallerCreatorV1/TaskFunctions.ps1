@@ -128,15 +128,16 @@ function RunInstaller {
     $clientSecret = Get-VstsInput -Name clientSecret
     $project = $taskArgs.ProjectName.ToLower()
 
+    $linuxDirectory = $installerDirectory.Replace("\", "/").Replace("C:", "/c")
     # Push-Location
     # try {
     #     Write-Host "Running Installer"
 
         # Set-Location $installerDirectory
-        c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $installerDirectory && .\update_release_version.sh -product $project `
+        c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDirectory && .\update_release_version.sh -product $project `
                                                                     -major $($version.Major) -minor $($version.Minor) `
                                                                     -sp $($version.Patch) -build $($version.Build)"
-        c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $installerDirectory && .\build_installer.sh -product $project `
+        c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDirectory && .\build_installer.sh -product $project `
                                                             -major $($version.Major) -minor $($version.Minor) `
                                                             -clientId $clientId -clientSecret $clientSecret"
     # } finally {
