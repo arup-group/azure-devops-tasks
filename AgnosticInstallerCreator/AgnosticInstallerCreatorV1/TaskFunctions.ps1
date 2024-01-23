@@ -132,7 +132,8 @@ function RunInstaller {
     try {
         Write-Host "Running Installer"
         Set-Location $installerDirectory
-        
+
+        choco install -y git
         bash -c "./build_installer.sh -product $project -major $($version.Major) -minor $($version.Minor) -patch $($version.Patch) -build $($version.Build) -clientId $clientId -clientSecret $clientSecret"
     } finally {
         Pop-Location
