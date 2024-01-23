@@ -170,5 +170,5 @@ If you want, you can create a `test.env` file in the custom task directory and p
     INPUT_MYINPUT="my value"
     INPUT_ANOTHERINPUT=another\value
 
-    Running .\AgnosticInstallerCreator\AgnosticInstallerCreatorV1\AgnosticInstallerCreator.ps1...
+    Running .\CustomTask\CustomTaskV1\CustomTaskV1.ps1...
     ```

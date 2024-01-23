@@ -12,8 +12,6 @@ try {
   ClearInstallerDirectory $taskArgs.RepoPath $installerInfo.BuilderDirectory
   CopyWindowsInstaller $taskArgs.SourcesDirectory $installerInfo.BuilderDirectory
 
-  BuildHelp # TODO
-
   CopyDlls $taskArgs $installerInfo.TargetDirectory
   RunInstaller $taskArgs $version $installerInfo.BuilderDirectory
 } finally {

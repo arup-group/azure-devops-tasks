@@ -97,66 +97,6 @@ function CopyWindowsInstaller {
     Copy-Item -Path $sourcesDirectory\oasys-windows-installer -Destination $installerDirectory -Recurse -Force
 }
 
-function BuildHelp {
-    # param (
-    #     [Parameter(Mandatory=$true)]
-    #     [string]$sourcesDirectory,
-    #     [Parameter(Mandatory=$true)]
-    #     [string]$projectParentDirectory,
-    #     [Parameter(Mandatory=$true)]
-    #     [string]$projectName
-    # )
-
-    # $buildHelp = Get-VstsInput -Name buildHelp
-    # $includePdf = Get-VstsInput -Name includePdf
-
-    # $project = $projectName.ToLower()
-
-    # $helpDirectory = "$projectParentDirectory\$project\help"
-    # $helpFileOverride = Get-VstsInput -Name helpFileOverride -Default "$project.hmxp"
-
-    # # Help and Manual Settings
-    # $helpAndManualPath = "$sourcesDirectory\HelpAndManualMinimal"
-
-    # # Project Paths
-    # $skinPath = "$sourcesDirectory\oasys-helpandmanual-skin"
-    # $outputPath = "$sourcesDirectory\output"
-
-    # # Project Settings
-    # $helpProject = $helpFileOverride
-    # $skinFile = "Oasys.hmskin"
-    # $logFile = "$project.log"
-    # $projectVariables = "project_variables.txt"
-
-    # # # CHM Settings
-    # $chmFileName = "$projectName.chm"
-    # $chmOptions = "PRODUCT_${project.toUpper()}"
-
-    # # PDF Settings
-    # $pdfFileName = "${installerProjectName}${major}.${minor}_Manual.pdf"
-    # $pdfTemplate = "oasys_$project.mnl"
-
-    # # HnM Executable
-    # $hnmexe = "HELPMAN.EXE"
-
-    # Set-Content -Path "$helpDirectory\project_variables.txt" `
-    #     -Value "VERSION=$major.$minor`r`nPROGRAM=$projectName"
-
-    # # Working directory
-    # Write-Host "Building Help files"
-    # $p=Start-Process "${helpAndManualPath}\${hnmexe}" -ArgumentList "$helpDirectory\$helpProject `
-    #     /stdout /CHM=${outputPath}\${chmFileName} /O=${skinPath}\${skinFile} /I=CHM,${chmOptions} `
-    #     /V=${helpDirectory}\${projectVariables} /PDF=${outputPath}\${pdfFileName} `
-    #     /TEMPLATE=${helpDirectory}\${pdfTemplate} /V=${helpDirectory}\${projectVariables} `
-    #     /L=${outputPath}\${logFile}" -Wait -PassThru
-    # $p.WaitForExit()
-
-    # Get-ChildItem -Filter *.chm -Path "$outputPath" -Recurse -Force | Copy-Item -Destination $targetDirectory
-    # If ($includePdf -eq "yes") {
-    #     Get-ChildItem -Filter *.pdf -Path "$outputPath" -Recurse -Force | Copy-Item -Destination "$targetDirectory\Docs"
-    # }
-}
-
 function CopyDlls {
     param(
         [Parameter(Mandatory=$true)]

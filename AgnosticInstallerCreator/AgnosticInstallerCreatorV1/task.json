@@ -55,27 +55,6 @@
             "helpMarkDown": "The full four-numbered version of the application, i.e., <major>.<minor>.<patch>.<build>"
         },
         {
-            "name": "buildHelp",
-            "type": "radio",
-            "label": "Build help?",
-            "required": true,
-            "options": {
-                "yes": "Yes",
-                "no": "No"
-            }
-        },
-        {
-            "name": "includePdf",
-            "type": "radio",
-            "label": "Include help PDF in installer?",
-            "defaultValue": "yes",
-            "required": false,
-            "options": {
-                "yes": "Yes",
-                "no": "No"
-            }
-        },
-        {
             "name": "clientId",
             "type": "string",
             "label": "Client ID for accessing Azure Key Vault",
