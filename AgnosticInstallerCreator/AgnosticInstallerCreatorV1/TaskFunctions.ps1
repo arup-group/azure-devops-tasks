@@ -128,13 +128,7 @@ function RunInstaller {
     $clientSecret = Get-VstsInput -Name clientSecret
     $project = $taskArgs.ProjectName.ToLower()
 
-    Push-Location
-    try {
-        Write-Host "Running Installer"
-        Set-Location $installerDirectory
-
-        & 'C:\Program Files\Git\usr\bin\bash.exe' -l -c "./build_installer.sh -product $project -major $($version.Major) -minor $($version.Minor) -patch $($version.Patch) -build $($version.Build) -clientId $clientId -clientSecret $clientSecret"
-    } finally {
-        Pop-Location
-    }
+    Write-Host "Running Installer"
+    $linuxDir = $installerDirectory.replace('\', '/').replace('C:', '/c/')
+    c:\tools\msys64\usr\bin\env MSYSTEM=MINGW64 /bin/bash -l -c "cd $linuxDir && ./build_installer.sh -product $project -major $($version.Major) -minor $($version.Minor) -patch $($version.Patch) -build $($version.Build) -clientId $clientId -clientSecret $clientSecret"
 }
