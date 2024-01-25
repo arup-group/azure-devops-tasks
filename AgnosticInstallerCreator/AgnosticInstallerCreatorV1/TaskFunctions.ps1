@@ -53,7 +53,7 @@ function GetInstallerInfo {
     $installerInfo = "" | Select-Object -Property `
         BuilderDirectory, TargetDirectory
 
-    $installerInfo.BuilderDirectory = "$($taskArgs.RepoPath)\installer-builder"
+    $installerInfo.BuilderDirectory = "$($taskArgs.ProjectParentPath)\installer-builder"
 
     $appDirectory = "$($installerInfo.BuilderDirectory)\$($taskArgs.ProjectName.ToLower())" `
                     + "-$($version.Major).$($version.Minor)"
