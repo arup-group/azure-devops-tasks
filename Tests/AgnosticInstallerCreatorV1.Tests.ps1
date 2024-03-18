@@ -35,14 +35,14 @@ Describe 'TaskFunctions' {
         }
 
         It 'projectParentPath should not be prepended with repoPath' {
-            # if it already starts with it
+            # if it already starts with RepoPath, ProjectParentPath is not changed.
             Mock Get-VstsInput { return "all-repos-dir\test_repo\test_project_path" } -ParameterFilter { $Name -eq "projectParentPath" }
 
             $taskArgs = ReadTaskArguments
 
             $taskArgs.ProjectParentPath | Should -Be "all-repos-dir\test_repo\test_project_path"
 
-            # if projectParentPath starts with "C:"
+            # if projectParentPath starts with "C:", ProjectParentPath is not changed.
             Mock Get-VstsInput { return "C:\test_project_path" } -ParameterFilter { $Name -eq "projectParentPath" }
 
             $taskArgs = ReadTaskArguments
@@ -97,12 +97,11 @@ Describe 'TaskFunctions' {
     It 'Should create installer directories using the input correctly' {
         $taskArgs = @{
             ProjectName="TestProject"
-            RepoPath="C:\src-dir\test-repo"
+            ProjectParentPath="C:\src-dir\test-repo"
         }
         $version = @{
             Major = "1"
             Minor = "2"
-            Patch = "3"
         }
 
         $installerInfo = GetInstallerInfo $taskArgs $version
@@ -113,7 +112,7 @@ Describe 'TaskFunctions' {
     }
 
     It 'Should delete the installer directory if it exists' {
-        # Make installer directory with one file
+        # Make installer directory with one file inside
         $sourcesDirectory = "."
         $installerDirectory = "$sourcesDirectory\installer"
         $fileName = "$installerDirectory\testfile.txt"
