@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "installer-create-task",
     "name": "Oasys Installer Create Task",
-    "version": "0.0.34",
+    "version": "0.0.35",
     "publisher": "ArupGroup",
     "targets": [
         {
@@ -27,6 +27,9 @@
             "path": "InstallerCreator/InstallerCreatorV4"
         },
         {
+            "path": "AgnosticInstallerCreator/AgnosticInstallerCreatorV1"
+        },
+        {
             "path": "OpenCpp/OpenCppInstallerV1"
         },
         {
@@ -37,6 +40,16 @@
         }
     ],
     "contributions": [
+        {
+            "id": "oasys-agnostic-installer-v1",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "AgnosticInstallerCreator/AgnosticInstallerCreatorV1"
+            }
+        },
         {
             "id": "oasys-installer",
             "type": "ms.vss-distributed-task.task",

@@ -1,0 +1,83 @@
+{
+    "id": "f40fd1a1-d428-48ee-bf61-56f56d4b94dd",
+    "name": "OasysAgnosticReleaseV1",
+    "friendlyName": "OasysAgnosticReleaseV1",
+    "description": "Build an Oasys Release (Version 1)",
+    "helpUrl": "https://github.com/arup-group/azure-devops-tasks/",
+    "helpMarkDown": "[Learn more about this task](https://github.com/arup-group/azure-devops-tasks/blob/master/README.md)",
+    "category": "Build",
+    "visibility": [
+        "Build"
+    ],
+    "author": "Arup Group",
+    "version": {
+        "Major": 1,
+        "Minor": 1,
+        "Patch": 0
+    },
+    "demands": [
+    ],
+    "minimumAgentVersion": "1.95.0",
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": false
+        }
+    ],
+    "inputs": [
+        {
+            "name": "projectParentPath",
+            "type": "string",
+            "label": "Parent path of the project",
+            "required": true,
+            "helpMarkDown": "Parent path of the project within the Build.SourcesDirectory, e.g. oasys-compos/src/compos. Can be an absolute path or a relative path to Build.SourcesDirectory."
+        },
+        {
+            "name": "repoName",
+            "type": "string",
+            "label": "Name of the repo",
+            "required": true,
+            "helpMarkDown": "Name of the repo, e.g. oasys-combined"
+        },
+        {
+            "name": "projectName",
+            "type": "string",
+            "label": "Display name of the project",
+            "required": true,
+            "helpMarkDown": "Display name of the project"
+        },
+        {
+            "name": "fullVersion",
+            "type": "string",
+            "label": "The full four-numbered version of the application",
+            "required": true,
+            "helpMarkDown": "The full four-numbered version of the application, i.e., <major>.<minor>.<patch>.<build>"
+        },
+        {
+            "name": "clientId",
+            "type": "string",
+            "label": "Client ID for accessing Azure Key Vault",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Client ID for accessing Azure Key Vault holding EV cert"
+        },
+        {
+            "name": "clientSecret",
+            "type": "string",
+            "label": "Client Secret for accessing Azure Key Vault",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Client secret for accessing Azure Key Vault holding EV cert"
+        }
+    ],
+    "instanceNameFormat": "Build release",
+    "execution": {
+        "PowerShell3": {
+            "target": "AgnosticInstallerCreator.ps1",
+            "platforms": [
+                "windows"
+            ]
+        }
+    }
+}
